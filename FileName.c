@@ -99,13 +99,85 @@ int mainPoint() {
 }
 
 
+int mainY(void) {
+	//实型
+
+	float a = 3.14f;
+
+	//默认保留6位小数，加小数可以指定精度
+	printf("float a is %f \n", a);
+
+
+	printf("float a is %.2f \n", a);
+
+
+	double b = 3.1415926;
+
+
+	printf("double b is %lf \n", b);
+
+	printf("double b is %.4lf \n", b);
+
+
+	int eight = 032;
+
+	printf("eight is %d \n", eight);
+
+
+	int address = 0x1A3F;
+
+	printf("address is %d \n", address);
+}
+
+
+
 int main(void) {
-	unsigned int p = 100;
+	//格式符
 
-	int* all = &p;
+	int a = 10;
 
-	*all =  *all + 1;
+	printf("a is %d \n", a);//%d表示十进制整数
+
+	printf("a is %u \n", a);//%u表示无符号十进制整数
 
 
-	printf("%d", p);
+	long b = 10l;
+
+
+	printf("b is %ld \n", b);//%ld表示长整型
+
+	printf("b is %lu \n", b);//%lu表示无符号长整型
+
+
+	long long c = 10ll;
+
+	printf("c is %lld \n", c);//%lld表示长长整型
+
+	printf("c is %llu \n", c);//%llu表示无符号长长整型
+
+
+	char x = 's';
+
+	printf("x is %c \n", x);//%c表示字符型
+
+
+	char str[] = "hello";
+
+	printf("str is %s \n", str);//%s表示字符串
+
+
+	char next = 333332;
+
+
+	printf("next is %d \n", next);//char类型在打印时会被提升为int类型，因此这里使用%d打印是正确的,但是如果char的值超过了int的范围，打印出来的值就会不正确
+
+	printf("next is %c \n", next);//超过了char的范围，打印出来的值就会不正确
+
+
+	char chars[] = { 'h','e','\0'};
+
+	char test[20] = "dddddddddddd";
+
+	printf("chars is %s \n", chars);//%s表示字符串
+
 }
