@@ -131,7 +131,7 @@ int mainY(void) {
 
 
 
-int main(void) {
+int mainX(void) {
 	//格式符
 
 	int a = 10;
