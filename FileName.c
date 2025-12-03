@@ -131,7 +131,7 @@ int mainY(void) {
 
 
 
-int main(void) {
+int mains(void) {
 	//格式符
 
 	int a = 10;
@@ -180,4 +180,75 @@ int main(void) {
 
 	printf("chars is %s \n", chars);//%s表示字符串
 
+
+	
+
 }
+
+//scanf函数的使用，不安全的用法，容易引起缓冲区溢出，在VS直接无法启动
+void scanfNotSafe() {
+	//char scanfChar[5];
+
+
+	//scanf("%s", scanfChar);//注意这里的&符号不能加，因为scanfChar本身就是一个地址
+
+	//printf("scanfChar is %s \n", scanfChar);
+}
+
+int plusPlus() {
+	printf("ddd");
+	int a = 3;
+	s(a++);//a++会先传值，再自增
+
+	int b = 3;
+
+	s(++b);//++b会先自增，再传值
+
+	//自增的区别只在当前行中存在，即下面的c和d
+	int c = 3;
+
+	c++;
+
+	printf("c is %d", c);
+
+
+	int d = 3;
+
+	++d;
+
+	printf("d is %d", d);
+}
+
+int main() {
+	
+	int a = 32;
+
+	float b = 3.14f;
+
+	printf("a is %.2llf", a + b);//类型提升，int提升为float，再进行运算
+
+	int one = 352;
+
+	char two = one;//int类型赋值给char类型，发生了类型降级,char最大是255，因此会发生数据丢失
+
+	printf("two is %d \n", two);
+
+	float price = 3.6f;
+
+	int weight = 4;
+
+
+	double sum = price * weight;//float类型提升为double类型，再进行运算
+
+	printf("sum is %.2lf \n", sum);
+
+	double sumTrans = (int)(price * weight);//强制类型转换，先进行运算，再转换为int类型，小数点后面的被截断
+
+	printf("sumTrans is %llf \n", sumTrans);
+}
+
+
+int s(int a) {
+	printf("a is %d \n", a);
+}
+
