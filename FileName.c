@@ -219,7 +219,7 @@ int plusPlus() {
 	printf("d is %d", d);
 }
 
-int main() {
+int mainVoid() {
 	
 	int a = 32;
 
