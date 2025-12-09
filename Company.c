@@ -79,15 +79,41 @@ static int arr() {
 
 	printf("two arr \n");//二维数组
 
-	int two_arr[2][3] = { {1,2,3},{2,3,4} };
-
+	
 	return 0;
 }
 
-int main(void) {
+
+//{1 1 1}| {1 1 1}
+void two_arr(void) {
+	int two_arr[2][3] = {
+		{1,2,3},
+		{2,3,4} 
+	};//总共有六个元素，每个都是int，也就是4*6=24
 	
-	arr();
+	size_t out_size = sizeof(two_arr) / sizeof(two_arr[0]);//一共6个元素，分为n块，每块三个,n=? 6/3 = 2
+
+	size_t inner_size = sizeof(two_arr[0]) / sizeof(two_arr[0][0]);//同理
+
+	printf("%zu, %zu", out_size,inner_size);
+	for (int i = 0; i < out_size; i++) {
+		//外层循环
+		for (int r = 0; r < inner_size; r++)
+		{
+			printf("two_arr is %d", two_arr[i][r]);
+		}
+	}
+}
+
+
+
+int mainT(void) {
 	
+	//arr();//一维数组
+
+	//two_arr();//二维数组
+	
+	str();//字符串
 
 	return 0;
 }
