@@ -30,7 +30,13 @@
     <ClCompile Include="add.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="point.c">
+    <ClCompile Include="指针数组.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="指针与函数.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="指针与字符串.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
