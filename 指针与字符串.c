@@ -21,7 +21,7 @@ int str_appear_count(char* str, char* appear_str);
 
 void revert_str(char* str);//字符串逆序返回
 
-int main(void) {
+int main_str_func(void) {
 	point_str();//指针字符串是常量，不可修改
 
 	point_str_address();//指针字符串的地址都是一致的
@@ -85,7 +85,31 @@ int main(void) {
 
 	char str_cmp_dest[100] = "helle";
 
-	printf("字符串比较 %d", strcmp(str_cmp_src, str_cmp_dest));//比较两个字符串，如果相等返回0，如果不相等，进一步比较s1和s2对应位的ascall码，s1>s2 返回1，s1<s2返回-1
+	printf("字符串比较 %d \n", strcmp(str_cmp_src, str_cmp_dest));//比较两个字符串，如果相等返回0，如果不相等，进一步比较s1和s2对应位的ascall码，s1>s2 返回1，s1<s2返回-1
+
+
+	char  str_ncmp_src[100] = "hello";
+
+	char str_ncmp_dest[100] = "hellz";
+
+	printf("字符串strncmp比较,%d \n", strncmp(str_ncmp_src, str_ncmp_dest, 3));//比较两个字符串，但是只比较前n个字符
+
+
+	char s_print_f_buf[100];
+
+	sprintf(s_print_f_buf, "%d%c%d=%d", 10, '+', 34, 10 + 34);//将后面的结果写入前面
+
+	printf("sprintf写入后结果 %s \n", s_print_f_buf);
+
+
+	char s_scan_f_buf[] = "10+24=34";
+
+	int s_scanf_a, s_scanf_b, s_scanf_c;
+
+	int s_scanf_res =  sscanf(s_scan_f_buf, "%d+%d=%d", &s_scanf_a, &s_scanf_b, &s_scanf_c);//从第一个参数读取字符串按照第二个参数格式化字符串返回第三个参数的值
+
+
+	printf("sscanf 调用后结果a:%d,b:%d,c:%d,sscanf返回结果:%d \n",s_scanf_a,s_scanf_b,s_scanf_c,s_scanf_res);
 }
 
 void revert_str(char* str) {

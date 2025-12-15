@@ -128,6 +128,7 @@
     <ClCompile Include="FileName.c" />
     <ClCompile Include="fun.c" />
     <ClCompile Include="Str.c" />
+    <ClCompile Include="字符串函数.c" />
     <ClCompile Include="指针与函数.c" />
     <ClCompile Include="指针与字符串.c" />
     <ClCompile Include="指针数组.c" />
