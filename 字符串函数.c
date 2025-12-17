@@ -14,7 +14,7 @@ void func_str_tok();
 
 void func_str_a_to();
 
-int main(void) {
+int main_str_func(void) {
 
 	func_str_char();
 

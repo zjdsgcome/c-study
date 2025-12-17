@@ -21,7 +21,7 @@ int str_appear_count(char* str, char* appear_str);
 
 void revert_str(char* str);//字符串逆序返回
 
-int main_str_func(void) {
+int main_str_p(void) {
 	point_str();//指针字符串是常量，不可修改
 
 	point_str_address();//指针字符串的地址都是一致的
