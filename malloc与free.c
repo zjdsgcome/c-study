@@ -12,6 +12,9 @@ typedef struct Person {
 
 Person* get_person(void);
 
+
+void two_arr_malloc(void);
+
 int main(void) {
 
 	int* p = (int*)malloc(10 * sizeof(int));// 申请10个int字节大小的空间
@@ -61,4 +64,25 @@ Person* get_person(void) {
 	}
 
 	return heap_person;
+}
+
+
+void two_arr_malloc(void) {
+	//二级指针
+	int** p = (int**)malloc(sizeof(int*) * 5);//int** p  = int*[]p  = [int*,int*]
+	if (p != NULL) {
+		for (size_t i = 0; i < 5; i++)
+		{
+			p[i] = (int)malloc(sizeof(int)*5);//每一个都是int* int* = (int)malloc(sizeof(int));
+		}
+		for (size_t i = 0; i < 5; i++) { //先释放内层
+			free(p[i]);
+			p[i] = NULL;
+		}
+	}
+
+	free(p);
+
+	p = NULL;
+
 }
