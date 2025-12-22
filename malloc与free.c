@@ -15,7 +15,7 @@ Person* get_person(void);
 
 void two_arr_malloc(void);
 
-int main(void) {
+int maisn(void) {
 
 	int* p = (int*)malloc(10 * sizeof(int));// 申请10个int字节大小的空间
 

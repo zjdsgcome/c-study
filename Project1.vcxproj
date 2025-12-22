@@ -134,6 +134,7 @@
     <ClCompile Include="指针与函数.c" />
     <ClCompile Include="指针与字符串.c" />
     <ClCompile Include="指针数组.c" />
+    <ClCompile Include="结构体.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="my.h" />
