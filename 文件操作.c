@@ -439,6 +439,8 @@ static void file_write_test() {
 		return;
 	}
 
+	fclose(fp);//调用close将写内容刷入文件
+
 	FILE* read_fp = get_fp("rb");
 
 	if (read_fp == NULL) {
@@ -446,11 +448,16 @@ static void file_write_test() {
 	}
 	FileWrite read_fw;
 
-	fread(&read_fw,sizeof(FileWrite),1,read_fp);//读取一个结构体
+	size_t read_count  =  fread(&read_fw,sizeof(FileWrite),1,read_fp);//读取一个结构体
+
+	if (read_count == 0) {
+		perror("read error");
+		return;
+	}
 
 	printf("fread result is %d,%s,%d",read_fw.age,read_fw.name,read_fw.class);
 
-	fclose(fp);
+	
 
 	fclose(read_fp);
 }
