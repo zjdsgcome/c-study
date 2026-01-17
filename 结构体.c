@@ -81,7 +81,8 @@ void get_struct_size() {
 
 
 
-int main(void) {
+
+int main_struct_ma(void) {
 	s1.age = 100;
 	HightStudent s3;//s3是局部变量
 

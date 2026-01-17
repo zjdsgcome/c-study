@@ -51,9 +51,33 @@
     <ClCompile Include="结构体.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="结构体传参.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="位段.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="结构体练习.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="结构体练习方法.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="枚举.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="文件操作.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="my.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="通讯录.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="文件操作.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

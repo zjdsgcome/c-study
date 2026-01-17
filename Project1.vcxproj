@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -129,15 +129,23 @@
     <ClCompile Include="fun.c" />
     <ClCompile Include="malloc与free.c" />
     <ClCompile Include="Str.c" />
+    <ClCompile Include="位段.c" />
     <ClCompile Include="全局变量与局部变量.c" />
     <ClCompile Include="字符串函数.c" />
     <ClCompile Include="指针与函数.c" />
     <ClCompile Include="指针与字符串.c" />
     <ClCompile Include="指针数组.c" />
+    <ClCompile Include="文件操作.c" />
+    <ClCompile Include="枚举.c" />
     <ClCompile Include="结构体.c" />
+    <ClCompile Include="结构体传参.c" />
+    <ClCompile Include="结构体练习.c" />
+    <ClCompile Include="结构体练习方法.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="my.h" />
+    <ClInclude Include="文件操作.h" />
+    <ClInclude Include="通讯录.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

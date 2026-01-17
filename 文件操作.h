@@ -1,0 +1,93 @@
+#pragma once
+
+#ifndef FILE_OPERATE_FUN
+#define FILE_OPERATE_FUN
+#define  _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+#define WRITE_26_WORD_TO_FILE 0
+
+
+#define WRITE_END_TO_FILE 0
+
+
+#define mth_fgets_file 0 //fgets test
+
+#define fputs_define 0 //fputs test
+
+
+#define fgets_put_file 0 //读取用户输入并写入到文件
+
+#define file_operate_flag 0 // 是否允许文件四则运算
+
+#define file_printf_test_flag 0 // fprintf测试
+
+#define file_scanf_test_flag 0 // fscanf测试
+
+#define file_scanf_feof_test_flag 0 // fscanf的提前退出文件读取问题
+
+#define file_scanf_out_of_range 0 // fscanf的边界问题
+
+#define file_random_sort 0 // 生成随机数到文件后读取排序
+
+
+#define file_write_flag 1//fwrite函数
+
+#define FILE_URL "C:\\Users\\Administrator\\Desktop\\ctest.txt"
+
+
+static FILE* get_fp(const char* mode);//获取文件指针
+
+static void fgets_file();//fgets 读取文件
+
+static void read_file_c();
+
+static void write_fputs();
+
+static void read_write();
+
+static void file_operate();//文件四则运算
+
+static void file_printf();//fprintf
+
+static void file_scanf();//fscanf
+
+static void file_scanf_feof();//fscanf的feof提前结束问题
+
+static void file_scanf_out_of_range_test();//fscanf的边界问题
+
+static void file_random_sort_test();//生成随机数到文件后读取排序
+
+static void file_write_test();//fwrite
+
+#define ADD '+'
+
+#define SUBTRACT '-'
+
+#define MULTIPY '*'
+
+#define DIVIDE '/'
+
+
+typedef struct Operate_s {
+	int first_operate;
+
+	char operate_flag;
+
+	int second_operate;
+
+	int operate_result;
+
+} Operate_s;
+
+typedef struct FileWrite_s {
+	int age;
+
+	char name[100];
+
+	int class;
+} FileWrite;
+
+#endif // !FILE_OPERATE_FUN
