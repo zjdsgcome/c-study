@@ -6,6 +6,8 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<sys/types.h>
+#include<sys/stat.h>
 
 #define WRITE_26_WORD_TO_FILE 0
 
@@ -37,7 +39,13 @@
 
 #define copy_big_file_flag 0 //拷贝大文件
 
-#define file_tell_flag 1 //ftell
+#define file_tell_flag 0 //ftell
+
+#define file_read_after_write_flag 0 //综合测试文件写后读取
+
+
+#define file_stat_flag 1 //stat函数 
+
 
 #define FILE_URL "C:\\Users\\Administrator\\Desktop\\ctest.txt"
 
@@ -76,6 +84,11 @@ static void file_write_test();//fwrite
 static void big_file_copy();//大文件读写
 
 static void file_tell_test();//ftell
+
+static void file_write_after_read_test();
+
+static void file_stat_test();
+
 
 #define ADD '+'
 

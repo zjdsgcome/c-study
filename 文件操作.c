@@ -126,6 +126,12 @@ int main() {
 #if file_tell_flag
 	file_tell_test();
 #endif
+#if file_read_after_write_flag
+	file_write_after_read_test();
+#endif
+#if file_stat_flag
+	file_stat_test();
+#endif
 }
 
 static FILE* get_fp(const char* mode) {
@@ -151,13 +157,13 @@ static void write_fputs() {
 	char buf[100] = "hello world";
 
 	//向屏幕写入
-	int res =  fputs(buf,stdout);
+	int res = fputs(buf, stdout);
 
 	if (res > -1 && res != EOF) { //写入成功返回非负,如果发生错误返回EOF
 		printf("写入成功");
 	}
 
-	printf("fputs result is %d",res);
+	printf("fputs result is %d", res);
 }
 
 
@@ -174,12 +180,12 @@ static void read_write() {
 
 		FILE* fp = NULL;
 
-		fp = fopen(FILE_URL,"a+");
+		fp = fopen(FILE_URL, "a+");
 
-		int put_res =  fputs(buf,fp);
+		int put_res = fputs(buf, fp);
 
 		fclose(fp);
-		
+
 		if (!strcmp(buf, ":wq\n")) {
 			break;
 		}
@@ -187,16 +193,16 @@ static void read_write() {
 }
 
 static char* file_operate_to_file(Operate_s* operate_s) {
-	char* str_concat_buf = malloc(100*sizeof(char));
+	char* str_concat_buf = malloc(100 * sizeof(char));
 	if (str_concat_buf == NULL) {
 		printf("error");
 		return NULL;
 	}
 
 	sprintf(str_concat_buf, "%d%c%d=%d\n",
-		operate_s->first_operate, 
-		operate_s->operate_flag, 
-		operate_s->second_operate, 
+		operate_s->first_operate,
+		operate_s->operate_flag,
+		operate_s->second_operate,
 		operate_s->operate_result);//sprintf:根据字符串格式化的内容从buffer取对应的值回填回变量
 	return str_concat_buf;//返回指针必须要malloc
 }
@@ -206,23 +212,23 @@ static void file_operate() {
 
 	FILE* write_fp = NULL;
 
-	fp = fopen(FILE_URL,"r+");//定义读
+	fp = fopen(FILE_URL, "r+");//定义读
 
 	write_fp = fopen(FILE_URL, "a+");//定义写
 
-	if (fp == NULL ||write_fp == NULL) {
+	if (fp == NULL || write_fp == NULL) {
 		printf("fopen fail");
 		return;
 	}
 
-	char** all_line[100] = {0};//定义二级指针，写入的一句句话
+	char** all_line[100] = { 0 };//定义二级指针，写入的一句句话
 
 	int line = 0;//不知道二级指针被写入了多少数据，只能用计数器，sizeof对指针取值固定
 	while (1) {
 
 		char buf[100] = { 0 };
 
-		char* read_p =  fgets(buf,100,fp);
+		char* read_p = fgets(buf, 100, fp);
 
 		if (read_p == NULL) {
 			if (feof(fp)) {//是否读到文件末尾
@@ -235,10 +241,10 @@ static void file_operate() {
 			break;
 		}
 
-		Operate_s operates = {0};//初始化结构体为默认值
-		int ss_r =  sscanf(
+		Operate_s operates = { 0 };//初始化结构体为默认值
+		int ss_r = sscanf(
 			buf,
-			"%d%c%d=\n", 
+			"%d%c%d=\n",
 			&(operates.first_operate),
 			&(operates.operate_flag),
 			&(operates.second_operate)
@@ -288,13 +294,13 @@ static void file_operate() {
 static void file_printf() {
 	FILE* fp = NULL;
 
-	fp =  fopen(FILE_URL, "a+");
+	fp = fopen(FILE_URL, "a+");
 
 	if (fp == NULL) {
 		printf("fail to open file");
 		return;
 	}
-	fprintf(fp,"%d%c%d=%d",1,'+',2,1+2);
+	fprintf(fp, "%d%c%d=%d", 1, '+', 2, 1 + 2);
 
 	fclose(fp);
 }
@@ -311,9 +317,9 @@ static void file_scanf() {
 
 	int res;
 
-	int scanf_res = fscanf(fp,"%d%c%d=%d",&one,&operate_f,&two,&res);
+	int scanf_res = fscanf(fp, "%d%c%d=%d", &one, &operate_f, &two, &res);
 
-	printf("fscanf read result is %d%c%d=%d",one,operate_f,two,res);
+	printf("fscanf read result is %d%c%d=%d", one, operate_f, two, res);
 }
 
 
@@ -325,17 +331,17 @@ static void file_scanf_feof() {
 	}
 	while (1) {
 		int a;
-		
-		int res =  fscanf(fp, "%d\n", &a);
 
-		printf("read file before feof %d \n",a);
+		int res = fscanf(fp, "%d\n", &a);
+
+		printf("read file before feof %d \n", a);
 
 		if (feof(fp)) {
 			printf("文件读取结束，退出循环");
 			break;
 		}
 		//fscanf如果判断下次读取的format不符合则提前退出,因此后置打印会读取少数据
-		printf("read file after feof %d \n",a);
+		printf("read file after feof %d \n", a);
 	}
 
 }
@@ -365,7 +371,7 @@ static void file_random_sort_test() {
 		return;
 	}
 	//写入文件随机数
-	int arr[10] = {3,2,1,5,2,6,1,3,21,2};
+	int arr[10] = { 3,2,1,5,2,6,1,3,21,2 };
 	for (size_t i = 0; i < 10; i++) {
 		char buf[100] = { 0 };
 		/*sprintf(buf,"%d\n",arr[i]);
@@ -387,7 +393,7 @@ static void file_random_sort_test() {
 
 	while (1) {
 		int a = 0;
-		int r =  fscanf(write_fp,"%d\n",&a);
+		int r = fscanf(write_fp, "%d\n", &a);
 		read_arr[cout] = a;
 		cout++;
 		if (feof(write_fp)) {
@@ -413,7 +419,7 @@ static void file_random_sort_test() {
 	}
 
 	for (size_t i = 0; i < 10; i++) {
-		printf("%d\n",read_arr[i]);
+		printf("%d\n", read_arr[i]);
 	}
 
 	fclose(write_fp);
@@ -427,9 +433,9 @@ static void file_random_sort_test() {
 	char write_str[1000] = { 0 };
 
 	for (size_t i = 0; i < 10; i++) {
-		fprintf(sort_finish_write_fp,"%d\n",read_arr[i]);
+		fprintf(sort_finish_write_fp, "%d\n", read_arr[i]);
 	}
-	
+
 	fclose(sort_finish_write_fp);
 }
 
@@ -439,11 +445,11 @@ static void file_write_test() {
 	if (fp == NULL) {
 		return;
 	}
-	FileWrite f = { 
+	FileWrite f = {
 	1,"hello world",2
 	};
 
-	size_t write_res = fwrite(&f,sizeof(FileWrite),1,fp);//写入一个结构体
+	size_t write_res = fwrite(&f, sizeof(FileWrite), 1, fp);//写入一个结构体
 
 	if (write_res == 0) {
 		printf("write error");
@@ -459,10 +465,10 @@ static void file_write_test() {
 	}
 	FileWrite read_fw;
 
-	size_t read_count  =  fread(&read_fw,sizeof(FileWrite),1,read_fp);//读取一个结构体
+	size_t read_count = fread(&read_fw, sizeof(FileWrite), 1, read_fp);//读取一个结构体
 
 	if (read_count == 0) {
-		
+
 		if (feof(read_fp)) {
 			printf("正常情况，读到文件末尾\n");
 		}
@@ -477,9 +483,9 @@ static void file_write_test() {
 
 	}
 
-	printf("fread result is %d,%s,%d",read_fw.age,read_fw.name,read_fw.class);
+	printf("fread result is %d,%s,%d", read_fw.age, read_fw.name, read_fw.class);
 
-	
+
 	fclose(read_fp);
 }
 
@@ -502,10 +508,10 @@ static void big_file_copy() {
 
 	//buf本身就是地址
 	//每次fp读取1*BIG_FILE_COPY_SIZE大小的字节到buf中,并将实际读取的字节大小返回给read_bytes
-	while ((read_bytes = fread(buf, 1, BIG_FILE_COPY_SIZE, fp) ) > 0) {
+	while ((read_bytes = fread(buf, 1, BIG_FILE_COPY_SIZE, fp)) > 0) {
 
 		//从buf中取出1*read_bytes大小的字节写入到write_fp,取read_bytes是因为最后一次读取可能小于BIG_FILE_COPY_SIZE
-		size_t write_bytes = fwrite(buf,1, read_bytes,write_fp);
+		size_t write_bytes = fwrite(buf, 1, read_bytes, write_fp);
 		if (write_bytes != read_bytes) {
 			perror("write error \n");
 			fclose(write_fp);
@@ -532,22 +538,72 @@ static void file_tell_test() {
 		return;
 	}
 
- 	int seek_res =  fseek(fp,0,SEEK_END);
+	int seek_res = fseek(fp, 0, SEEK_END);
 	if (seek_res == -1) {
 		perror("read error");
 		return;
 	}
 	long size = ftell(fp);//文件大小(字节)
 
-	printf("file size is %lu \n",size);
+	printf("file size is %lu \n", size);
 
 	//再回到文件开头
 	rewind(fp);
 
 	long rewind_size = ftell(fp);
 
-	printf("rewind and get size %lu \n",rewind_size);
+	printf("rewind and get size %lu \n", rewind_size);
 
 	fclose(fp);
 
+}
+
+static void file_write_after_read_test() {
+	Operate_s op[4] = {
+		{1,'a',1,2},
+		{2,'b',3,4},
+		{4,'c',3,3},
+		{100,'d',3,3}
+	};
+	FILE* fp = get_fp("wb+");//可读可写
+	size_t write_res =  fwrite(&op,sizeof(Operate_s), 4, fp);
+	if (write_res == 0) {
+		perror("write error \n");
+		return;
+	}
+	
+	printf("point position is %lu",ftell(fp));
+	fseek(fp,0,SEEK_SET);
+	
+	while (1) {
+		Operate_s op_read;
+		size_t res =  fread(&op_read, sizeof(Operate_s),1, fp);
+		printf("first is %zu",res);
+		if (res == 0) {
+			if (feof(fp)) {
+				printf("read end of file \n");
+			}
+			else if (ferror(fp)) {
+				perror("read error of file \n");
+			}
+			break;
+		}
+		printf("operate_s is %d,%c,%d,%d \n",
+			op_read.first_operate,
+			op_read.operate_flag,
+			op_read.second_operate,
+			op_read.operate_result);
+	}
+	
+	fclose(fp);
+}
+
+
+static void file_stat_test() {
+	struct stat buf;
+	int ret = stat(FILE_URL,&buf);
+	if (ret == 0) {
+		
+		printf("file size is %lu", buf.st_size);
+	}
 }
