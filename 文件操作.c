@@ -132,6 +132,10 @@ int main() {
 #if file_stat_flag
 	file_stat_test();
 #endif
+
+#if file_flush_flag
+	file_flush_test();
+#endif
 }
 
 static FILE* get_fp(const char* mode) {
@@ -221,7 +225,7 @@ static void file_operate() {
 		return;
 	}
 
-	char** all_line[100] = { 0 };//定义二级指针，写入的一句句话
+	char* all_line[100] = { 0 };//定义二级指针，写入的一句句话
 
 	int line = 0;//不知道二级指针被写入了多少数据，只能用计数器，sizeof对指针取值固定
 	while (1) {
@@ -606,4 +610,46 @@ static void file_stat_test() {
 		
 		printf("file size is %lu", buf.st_size);
 	}
+}
+
+
+static void file_flush_test() {
+	//fflush
+	FILE* fp = get_fp("w+");
+
+	if (fp == NULL) {
+		perror("fail to open file");
+		return;
+	}
+	char* buf[100] = { 0 };
+	int count = 0;
+	while (1) {
+		char read_buf[1024] = { 0 };
+		char* get_res =  fgets(read_buf, sizeof(read_buf), stdin);
+		if (get_res == NULL) {
+			perror("get error \n");
+			return;
+		}
+		if (strcmp(get_res, ":q\n") == 0) {
+			break;
+		}
+		//malloc之后才能调用strcpy,不malloc就是野指针
+		buf[count] = (char*)malloc(strlen(read_buf)+1);
+		if (buf[count] == 0) {
+			return;
+		}
+		strcpy(buf[count], read_buf);
+		count++;
+	}
+
+	for (size_t i = 0; i < count; i++) {
+		printf("%s",buf[i]);
+	}
+
+	for (size_t i = 0; i < count; i++) {
+		free(buf[i]);
+	}
+
+	fclose(fp);
+
 }

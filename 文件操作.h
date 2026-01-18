@@ -44,8 +44,9 @@
 #define file_read_after_write_flag 0 //综合测试文件写后读取
 
 
-#define file_stat_flag 1 //stat函数 
+#define file_stat_flag 0 //stat函数 
 
+#define file_flush_flag 1 //fflush
 
 #define FILE_URL "C:\\Users\\Administrator\\Desktop\\ctest.txt"
 
@@ -88,6 +89,8 @@ static void file_tell_test();//ftell
 static void file_write_after_read_test();
 
 static void file_stat_test();
+
+static void file_flush_test();
 
 
 #define ADD '+'
