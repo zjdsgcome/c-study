@@ -35,7 +35,9 @@
 
 #define file_write_flag 0//fwrite函数
 
-#define copy_big_file_flag 1 //拷贝大文件
+#define copy_big_file_flag 0 //拷贝大文件
+
+#define file_tell_flag 1 //ftell
 
 #define FILE_URL "C:\\Users\\Administrator\\Desktop\\ctest.txt"
 
@@ -72,6 +74,8 @@ static void file_random_sort_test();//生成随机数到文件后读取排序
 static void file_write_test();//fwrite
 
 static void big_file_copy();//大文件读写
+
+static void file_tell_test();//ftell
 
 #define ADD '+'
 

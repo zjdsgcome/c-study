@@ -123,6 +123,9 @@ int main() {
 #if copy_big_file_flag
 	big_file_copy();
 #endif 
+#if file_tell_flag
+	file_tell_test();
+#endif
 }
 
 static FILE* get_fp(const char* mode) {
@@ -519,4 +522,32 @@ static void big_file_copy() {
 		free(buf);
 		return;
 	}
+}
+
+
+static void file_tell_test() {
+	FILE* fp = get_fp("rb");
+
+	if (fp == NULL) {
+		return;
+	}
+
+ 	int seek_res =  fseek(fp,0,SEEK_END);
+	if (seek_res == -1) {
+		perror("read error");
+		return;
+	}
+	long size = ftell(fp);//文件大小(字节)
+
+	printf("file size is %lu \n",size);
+
+	//再回到文件开头
+	rewind(fp);
+
+	long rewind_size = ftell(fp);
+
+	printf("rewind and get size %lu \n",rewind_size);
+
+	fclose(fp);
+
 }
