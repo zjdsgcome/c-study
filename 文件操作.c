@@ -120,6 +120,9 @@ int main() {
 #if file_write_flag
 	file_write_test();
 #endif
+#if copy_big_file_flag
+	big_file_copy();
+#endif 
 }
 
 static FILE* get_fp(const char* mode) {
@@ -133,6 +136,11 @@ static FILE* get_fp(const char* mode) {
 	}
 
 	return fp;
+}
+
+
+static FILE* get_fp_url(const char* file, const char* mode) {
+	return fopen(file, mode);
 }
 
 //fputs
@@ -451,13 +459,64 @@ static void file_write_test() {
 	size_t read_count  =  fread(&read_fw,sizeof(FileWrite),1,read_fp);//读取一个结构体
 
 	if (read_count == 0) {
-		perror("read error");
+		
+		if (feof(read_fp)) {
+			printf("正常情况，读到文件末尾\n");
+		}
+		else if (ferror(read_fp)) {
+			perror("读取文件失败 \n");
+			clearerr(read_fp);//清除错误原因
+		}
+		else {
+			printf("请求读取的元素个数为0");
+		}
 		return;
+
 	}
 
 	printf("fread result is %d,%s,%d",read_fw.age,read_fw.name,read_fw.class);
 
 	
-
 	fclose(read_fp);
+}
+
+
+static void big_file_copy() {
+	FILE* fp = get_fp_url(BIG_FILE_COPY_URL, "rb");
+	FILE* write_fp = get_fp_url(BIG_FILE_COPY_DEST_URL, "wb");
+	if (fp == NULL || write_fp == NULL) {
+		perror("open file error\n");
+		return;
+	}
+	char* buf = (char*)malloc(BIG_FILE_COPY_SIZE);//char buf[BIG_FILE_COPY_SIZE] = {0}不行，因为栈分配空间太小
+	if (buf == NULL) {
+		perror("malloc fail \n");
+
+		return;
+	}
+
+	size_t read_bytes;
+
+	//buf本身就是地址
+	//每次fp读取1*BIG_FILE_COPY_SIZE大小的字节到buf中,并将实际读取的字节大小返回给read_bytes
+	while ((read_bytes = fread(buf, 1, BIG_FILE_COPY_SIZE, fp) ) > 0) {
+
+		//从buf中取出1*read_bytes大小的字节写入到write_fp,取read_bytes是因为最后一次读取可能小于BIG_FILE_COPY_SIZE
+		size_t write_bytes = fwrite(buf,1, read_bytes,write_fp);
+		if (write_bytes != read_bytes) {
+			perror("write error \n");
+			fclose(write_fp);
+			free(buf);
+			fclose(fp);
+			return;
+		}
+	}
+
+	if (ferror(write_fp)) {
+		perror("write error \n");
+		fclose(write_fp);
+		fclose(fp);
+		free(buf);
+		return;
+	}
 }

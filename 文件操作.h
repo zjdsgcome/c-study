@@ -33,12 +33,21 @@
 #define file_random_sort 0 // 生成随机数到文件后读取排序
 
 
-#define file_write_flag 1//fwrite函数
+#define file_write_flag 0//fwrite函数
+
+#define copy_big_file_flag 1 //拷贝大文件
 
 #define FILE_URL "C:\\Users\\Administrator\\Desktop\\ctest.txt"
 
+#define BIG_FILE_COPY_URL "C:\\Users\\Administrator\\Desktop\\GoogleSansCode-v6.001.zip"
+
+#define BIG_FILE_COPY_DEST_URL "C:\\Users\\Administrator\\Desktop\\GoogleSansCode111-v6.001.zip"
+
+#define BIG_FILE_COPY_SIZE (1024*8) //8kb
 
 static FILE* get_fp(const char* mode);//获取文件指针
+
+static FILE* get_fp_url(const char* file,const char* mode);
 
 static void fgets_file();//fgets 读取文件
 
@@ -61,6 +70,8 @@ static void file_scanf_out_of_range_test();//fscanf的边界问题
 static void file_random_sort_test();//生成随机数到文件后读取排序
 
 static void file_write_test();//fwrite
+
+static void big_file_copy();//大文件读写
 
 #define ADD '+'
 
